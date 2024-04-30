@@ -1,0 +1,28 @@
+@import '../../styles/mixins/mixins.scss';
+
+.cardListWrapper {
+  margin-top: 50px;
+
+  margin-bottom: 25px;
+
+  .cardListTitle {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+
+    color: #b29f7e;
+
+    margin-bottom: 20px;
+  }
+
+  .cardList {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px 10px;
+    justify-content: center;
+
+    @include onDesktop {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

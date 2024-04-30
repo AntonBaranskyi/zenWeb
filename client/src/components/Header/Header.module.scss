@@ -1,0 +1,20 @@
+.header {
+  background-color: #172234;
+
+  padding-block: 18px;
+
+  .headerWrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .headerButtons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    .buttonLogin {
+      width: 160px;
+    }
+  }
+}

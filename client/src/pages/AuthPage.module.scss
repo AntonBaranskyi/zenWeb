@@ -1,0 +1,14 @@
+.authPageWrapper {
+  display: flex;
+
+  height: calc(100vh - 82px);
+
+  .authPagePoster {
+    background-image: url('../assets/imageAuth.jpg');
+
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 62%;
+    background-size: contain;
+  }
+}

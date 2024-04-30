@@ -1,0 +1,29 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding-block: 11px;
+
+  border-radius: 5px;
+
+  color: #b29f7e;
+  border: 1px solid #b29f7e;
+
+  text-align: center;
+
+  font-weight: 700;
+  line-height: 22px;
+
+  cursor: pointer;
+
+  &-primary {
+    color: #fff;
+
+    background-color: #b29f7e;
+
+    border: none;
+    font-size: 16px;
+  }
+}
