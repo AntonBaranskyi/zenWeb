@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './LoginForm.module.scss';
 
 export const LoginForm = () => {
@@ -28,7 +29,10 @@ export const LoginForm = () => {
 
         <a className={`button button-primary ${styles.buttonLogin}`}>Sign in</a>
         <p className={styles.signUpText}>
-          Don’t have account? <a className={styles.signUpLink}>Sign Up</a>
+          Don’t have account?{' '}
+          <Link to='/auth/signUp' className={styles.signUpLink}>
+            Sign Up
+          </Link>
         </p>
       </form>
     </div>

@@ -1,14 +1,36 @@
+@import '../styles/mixins/mixins.scss';
+
 .authPageWrapper {
   display: flex;
+  justify-content: center;
+
+  @include onSmallDesktop {
+    justify-content: flex-start;
+  }
 
   height: calc(100vh - 82px);
 
   .authPagePoster {
+    // display: none;
+
     background-image: url('../assets/imageAuth.jpg');
+
+    width: 62%;
 
     background-repeat: no-repeat;
     height: 100%;
-    width: 62%;
+  
     background-size: contain;
+
+    // @include onSmallDesktop {
+    //   display: block;
+
+    //   width: 55%;
+    // }
+
+    // @include onDesktop {
+
+    //   width: 62%;
+    // }
   }
 }

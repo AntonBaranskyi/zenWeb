@@ -1,3 +1,5 @@
+@import '../../styles/mixins/mixins.scss';
+
 .mainScreen {
   background-image: linear-gradient(
       rgba(23, 34, 52, 0.6),
@@ -18,22 +20,48 @@
 
     .mainTitle {
       font-weight: 700;
-      font-size: 64px;
-      line-height: 80px;
+      font-size: 36px;
+      line-height: 45px;
 
       margin-bottom: 10px;
+
+      text-align: center;
+
+      @include onTablet {
+        font-size: 48px;
+        line-height: 60px;
+      }
+
+      @include onSmallDesktop {
+        font-size: 64px;
+        line-height: 80px;
+      }
     }
 
     .mainText {
-      width: 822px;
+      width: 350px;
+
       font-weight: 400;
-      font-size: 24px;
+      font-size: 16px;
       line-height: 32px;
       letter-spacing: -0.02em;
 
       text-align: center;
 
       margin-bottom: 30px;
+
+      @include onTablet {
+        width: 600px;
+
+        font-size: 24px;
+        line-height: 32px;
+      }
+
+      @include onSmallDesktop {
+        width: 822px;
+
+      
+      }
     }
 
     .mainButton {
