@@ -11,26 +11,26 @@
   height: calc(100vh - 82px);
 
   .authPagePoster {
-    // display: none;
+    display: none;
 
     background-image: url('../assets/imageAuth.jpg');
 
     width: 62%;
 
     background-repeat: no-repeat;
-    height: 100%;
-  
-    background-size: contain;
+    height: auto;
 
-    // @include onSmallDesktop {
-    //   display: block;
+    @include onTablet {
+      width: 600px;
+    }
 
-    //   width: 55%;
-    // }
+    @include onSmallDesktop {
+      display: block;
 
-    // @include onDesktop {
+      width: 890px;
+    }
 
-    //   width: 62%;
-    // }
+    @include onDesktop {
+    }
   }
 }

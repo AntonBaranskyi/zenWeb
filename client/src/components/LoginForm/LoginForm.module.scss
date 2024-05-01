@@ -1,8 +1,17 @@
+@import '../../styles/mixins/mixins.scss';
+
 .loginForm {
   display: flex;
 
   justify-content: center;
   align-items: center;
+
+  padding-inline: 20px;
+
+@include onSmallDesktop{
+  padding-inline: 100px;
+
+}
 
   .loginWrapper {
     display: flex;
