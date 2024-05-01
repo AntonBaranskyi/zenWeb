@@ -8,10 +8,9 @@
 
   padding-inline: 20px;
 
-@include onSmallDesktop{
-  padding-inline: 100px;
-
-}
+  @include onSmallDesktop {
+    padding-inline: 100px;
+  }
 
   .loginWrapper {
     display: flex;
@@ -80,11 +79,12 @@
       color: #172234;
 
       text-align: center;
-
-      .signUpLink {
-        color: #b29f7e;
-        cursor: pointer;
-      }
     }
   }
+}
+.signUpLink {
+  color: #b29f7e;
+  cursor: pointer;
+
+  text-align: center;
 }

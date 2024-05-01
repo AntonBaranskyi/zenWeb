@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
-import styles from './LoginForm.module.scss';
+import styles from './AuthForm.module.scss';
 
-export const LoginForm = () => {
+export const RegistartionForm = () => {
   return (
     <div className={styles.loginForm}>
       <form className={styles.loginWrapper}>
-        <h2 className={styles.loginTitle}>Login</h2>
+        <h2 className={styles.loginTitle}>Sign Up</h2>
+
+        <div className={styles.loginItemWrapper}>
+          <p className={styles.loginItemInfo}>Full Name</p>
+          <input type='text' className='input' placeholder='Full Name' />
+        </div>
 
         <div className={styles.loginItemWrapper}>
           <p className={styles.loginItemInfo}>Email</p>
@@ -19,21 +24,13 @@ export const LoginForm = () => {
             className={`input ${styles.inputPassword}`}
             placeholder='Password'
           />
-
-          <div className={styles.forgotWrapper}>
-            <a href='#' className={styles.forgotPassword}>
-              Forgot password?
-            </a>
-          </div>
         </div>
 
-        <a className={`button button-primary ${styles.buttonLogin}`}>Sign in</a>
-        <p className={styles.signUpText}>
-          Don’t have account?{' '}
-          <Link to='/auth/signUp' className={styles.signUpLink}>
-            Sign Up
-          </Link>
-        </p>
+        <a className={`button button-primary ${styles.buttonLogin}`}>Register</a>
+
+        <Link to='/auth/signUp' className={styles.signUpLink}>
+          Back to signIn
+        </Link>
       </form>
     </div>
   );
