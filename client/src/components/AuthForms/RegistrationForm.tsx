@@ -30,7 +30,6 @@ export const RegistartionForm = () => {
   });
 
   const onHandleSubmit = (data: IRegisterData) => {
-    console.log(data);
     
     dispatch(fetchRegister(data));
   };

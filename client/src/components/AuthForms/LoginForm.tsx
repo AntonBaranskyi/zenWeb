@@ -65,7 +65,6 @@ export const LoginForm = () => {
     dispatch(onCleanErrors());
   }, [dispatch]);
 
-  console.log(isAuth);
 
   if (isAuth) {
     return <Navigate to='/' />;

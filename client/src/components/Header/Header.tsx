@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { onLogoutUser, selectIsAuth } from '../../store/slices/userSlice';
@@ -9,6 +9,9 @@ export const Header = () => {
   const isAuth = useAppSelector(selectIsAuth);
 
   const dispacth = useAppDispatch();
+  const location = useLocation();
+
+  console.log(location.pathname.slice(1, 5));
 
   const handleLogout = () => {
     Confirm.show(
@@ -27,26 +30,30 @@ export const Header = () => {
       <div className='container'>
         <div className={styles.headerWrapper}>
           <div className={styles.headerButtons}>
-            {!isAuth ? (
-              <>
-                <Link
-                  to='/auth/logIn'
-                  className={`button ${styles.buttonLogin}`}
+            {location.pathname.slice(1, 5) !== 'auth' &&
+              (!isAuth ? (
+                <>
+                  <Link
+                    to='/auth/logIn'
+                    className={`button ${styles.buttonLogin}`}
+                  >
+                    Log In
+                  </Link>
+                  <Link
+                    to='/auth/signUp'
+                    className={`button button-primary ${styles.buttonLogin}`}
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              ) : (
+                <button
+                  className='button button-primary'
+                  onClick={handleLogout}
                 >
-                  Log In
-                </Link>
-                <Link
-                  to='/auth/signUp'
-                  className={`button button-primary ${styles.buttonLogin}`}
-                >
-                  Sign Up
-                </Link>
-              </>
-            ) : (
-              <button className='button button-primary' onClick={handleLogout}>
-                Logout
-              </button>
-            )}
+                  Logout
+                </button>
+              ))}
           </div>
         </div>
       </div>

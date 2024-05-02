@@ -1,6 +1,5 @@
 import styles from './DealCard.module.scss';
 
-// import cardPhoto from '../../assets/cardPhoto.png';
 import { IDeal } from '../../types/IDeal';
 import React from 'react';
 
