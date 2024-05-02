@@ -154,8 +154,8 @@ export const RegistartionForm = () => {
           Register
         </button>
 
-        <Link to='/auth/signUp' className={styles.signUpLink}>
-          Back to signIn
+        <Link to='/auth/logIn' className={styles.signUpLink}>
+          Back to login
         </Link>
       </form>
     </div>

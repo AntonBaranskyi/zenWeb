@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import styles from './MainScreen.module.scss';
 
 export const MainScreen = () => {
@@ -15,7 +16,7 @@ export const MainScreen = () => {
             is{' '}
           </p>
 
-          <a className={`button ${styles.mainButton}`}>Get started</a>
+          <Link to='/auth/logIn' className={`button ${styles.mainButton}`}>Get started</Link>
         </div>
       </div>
     </div>

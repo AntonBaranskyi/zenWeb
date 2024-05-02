@@ -20,6 +20,13 @@
 
   cursor: pointer;
 
+  &:hover {
+    background-color: #b29f7e;
+    opacity: 0.8;
+
+    color: white;
+  }
+
   &-primary {
     color: #fff;
 
@@ -27,6 +34,12 @@
 
     border: none;
     font-size: 16px;
+
+    // &:hover {
+    //   background-color: #fff;
+
+    //   color: #b29f7e;
+    // }
   }
 
   &:disabled {

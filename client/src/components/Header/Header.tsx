@@ -48,7 +48,7 @@ export const Header = () => {
                 </>
               ) : (
                 <button
-                  className='button button-primary'
+                  className={`button button-primary ${styles.buttonLogin}`}
                   onClick={handleLogout}
                 >
                   Logout
