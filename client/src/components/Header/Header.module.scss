@@ -1,10 +1,16 @@
+@import '../../styles/mixins/mixins.scss';
+
 .header {
   background-color: #172234;
 
-  min-height: 82px;
+  min-height: 62px;
 
-  padding-block: 18px;
+  padding-block: 12px;
 
+  @include onTablet {
+    min-height: 82px;
+    padding-block: 18px;
+  }
   .headerWrapper {
     display: flex;
     justify-content: flex-end;
@@ -16,7 +22,11 @@
     gap: 10px;
 
     .buttonLogin {
-      width: 160px;
+      width: 100px;
+
+      @include onTablet {
+        width: 160px;
+      }
     }
   }
 }
