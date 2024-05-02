@@ -1,12 +1,14 @@
 # Deal website. Test task (test task for Zenbittech)
 
   # Technologies used
-- React 
+- Node Js
 - TypeScript
-- Redux Toolkit
-- Axios
-- React router DOM
-- React Hook Form
+- Express
+- Postgres
+- Sequelize
+- Jsonwebtoken
+- Jsonwebtoken
+- Bcrypt
 
 
 
