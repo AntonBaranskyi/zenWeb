@@ -9,12 +9,14 @@ import { IRegisterData } from '../../types/IRegisterData';
 
 type State = {
   userData: IUser | null;
-  status: STATUS;
+  loginStatus: STATUS;
+  registerStatus: STATUS;
 };
 
 const initialState: State = {
   userData: null,
-  status: STATUS.LOADING,
+  loginStatus: STATUS.LOADING,
+  registerStatus: STATUS.LOADING,
 };
 
 export const fetchLogin = createAsyncThunk(
@@ -50,59 +52,64 @@ const userSlice = createSlice({
 
       window.localStorage.removeItem('token');
     },
+
+    onCleanErrors: (state) => {
+      state.loginStatus === STATUS.LOADING;
+      state.registerStatus = STATUS.LOADING;
+    },
   },
 
   extraReducers: (builder) => {
     builder.addCase(fetchLogin.pending, (state) => {
-      state.status = STATUS.LOADING;
+      state.loginStatus = STATUS.LOADING;
     });
 
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.userData = action.payload;
 
       window.localStorage.setItem('token', action.payload.token);
-      state.status = STATUS.SUCCESS;
+      state.loginStatus = STATUS.SUCCESS;
     });
 
     builder.addCase(fetchLogin.rejected, (state) => {
-      state.status = STATUS.ERROR;
+      state.loginStatus = STATUS.ERROR;
       state.userData = null;
     });
 
     builder.addCase(fetchRegister.pending, (state) => {
-      state.status = STATUS.LOADING;
+      state.registerStatus = STATUS.LOADING;
     });
 
     builder.addCase(fetchRegister.fulfilled, (state, action) => {
       state.userData = action.payload;
 
       window.localStorage.setItem('token', action.payload.token);
-      state.status = STATUS.SUCCESS;
+      state.registerStatus = STATUS.SUCCESS;
     });
 
     builder.addCase(fetchRegister.rejected, (state) => {
-      state.status = STATUS.ERROR;
+      state.registerStatus = STATUS.ERROR;
       state.userData = null;
     });
 
     builder.addCase(fetchAuthMe.pending, (state) => {
-      state.status = STATUS.LOADING;
+      state.loginStatus = STATUS.LOADING;
     });
 
     builder.addCase(fetchAuthMe.fulfilled, (state, action) => {
       state.userData = action.payload;
 
-      state.status = STATUS.SUCCESS;
+      state.loginStatus = STATUS.SUCCESS;
     });
 
     builder.addCase(fetchAuthMe.rejected, (state) => {
-      state.status = STATUS.ERROR;
+      // state.status = STATUS.ERROR;
       state.userData = null;
     });
   },
 });
 
-export const { onLogoutUser } = userSlice.actions;
+export const { onLogoutUser, onCleanErrors } = userSlice.actions;
 
 export default userSlice.reducer;
 

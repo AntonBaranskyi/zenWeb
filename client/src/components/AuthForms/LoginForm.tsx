@@ -3,7 +3,11 @@ import styles from './AuthForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { ILoginData } from '../../types/ILoginData';
-import { fetchLogin, selectIsAuth } from '../../store/slices/userSlice';
+import {
+  fetchLogin,
+  onCleanErrors,
+  selectIsAuth,
+} from '../../store/slices/userSlice';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { STATUS } from '../../types/statusEnum';
@@ -14,7 +18,7 @@ import { Navigate } from 'react-router-dom';
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
 
-  const { status } = useAppSelector((state) => state.user);
+  const { loginStatus: status } = useAppSelector((state) => state.user);
   const isAuth = useAppSelector(selectIsAuth);
 
   const {
@@ -56,6 +60,10 @@ export const LoginForm = () => {
       Notiflix.Notify.failure('Invalid login or password', { timeout: 1500 });
     }
   }, [status]);
+
+  useEffect(() => {
+    dispatch(onCleanErrors());
+  }, [dispatch]);
 
   console.log(isAuth);
 

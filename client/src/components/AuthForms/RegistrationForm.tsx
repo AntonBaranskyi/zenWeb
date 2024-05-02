@@ -1,7 +1,11 @@
 import { Link, Navigate } from 'react-router-dom';
 import styles from './AuthForm.module.scss';
 import { useForm } from 'react-hook-form';
-import { fetchRegister, selectIsAuth } from '../../store/slices/userSlice';
+import {
+  fetchRegister,
+  onCleanErrors,
+  selectIsAuth,
+} from '../../store/slices/userSlice';
 import { IRegisterData } from '../../types/IRegisterData';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -12,7 +16,7 @@ import Notiflix from 'notiflix';
 export const RegistartionForm = () => {
   const dispatch = useAppDispatch();
 
-  const { status } = useAppSelector((state) => state.user);
+  const { registerStatus: status } = useAppSelector((state) => state.user);
   const isAuth = useAppSelector(selectIsAuth);
 
   const {
@@ -61,6 +65,10 @@ export const RegistartionForm = () => {
       });
     }
   }, [status]);
+
+  useEffect(() => {
+    dispatch(onCleanErrors());
+  }, [dispatch]);
 
   if (isAuth) {
     return <Navigate to='/' />;

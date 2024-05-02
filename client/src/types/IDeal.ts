@@ -6,5 +6,8 @@ export interface IDeal {
   days_left: number;
   sold_percentage: number;
   yield: number;
-  
+}
+
+export interface IDealResponse {
+  deals: IDeal[];
 }
