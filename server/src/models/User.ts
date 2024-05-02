@@ -4,12 +4,12 @@ import { sequelize } from '../db/db.js';
 export const User = sequelize.define(
   'User',
   {
-    userId: {
+    user_id: {
       type: DataTypes.TEXT,
       allowNull: false,
       primaryKey: true,
     },
-    fullName: {
+    full_name: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -17,7 +17,7 @@ export const User = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    passwordHash: {
+    password_hash: {
       type: DataTypes.TEXT,
       allowNull: false,
     },

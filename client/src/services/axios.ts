@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const instatnce = axios.create({
-  baseURL: 'http://localhost:8080',
+  // baseURL: 'http://localhost:8080',
+  baseURL: 'https://zenweb-production-4f6f.up.railway.app',
 });
 
 instatnce.interceptors.request.use((config) => {
