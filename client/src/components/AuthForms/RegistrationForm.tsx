@@ -25,11 +25,13 @@ export const RegistartionForm = () => {
     formState: { errors, isValid },
     clearErrors,
   } = useForm({
-    defaultValues: { email: '', password: '', fullName: '' },
+    defaultValues: { email: '', password: '', full_name: '' },
     mode: 'onBlur',
   });
 
   const onHandleSubmit = (data: IRegisterData) => {
+    console.log(data);
+    
     dispatch(fetchRegister(data));
   };
 
@@ -42,7 +44,7 @@ export const RegistartionForm = () => {
   };
 
   const handleFullNameInputChange = () => {
-    clearErrors('fullName');
+    clearErrors('full_name');
   };
 
   useEffect(() => {
@@ -88,7 +90,7 @@ export const RegistartionForm = () => {
             type='text'
             className='input'
             placeholder='Full Name'
-            {...register('fullName', {
+            {...register('full_name', {
               required: 'Please,write your name',
               minLength: {
                 value: 3,
@@ -98,8 +100,8 @@ export const RegistartionForm = () => {
             onFocus={handleFullNameInputChange}
           />
 
-          {errors.fullName && (
-            <span className={styles.errorText}>{errors.fullName.message}</span>
+          {errors.full_name && (
+            <span className={styles.errorText}>{errors.full_name.message}</span>
           )}
         </div>
 

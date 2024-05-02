@@ -20,7 +20,7 @@ export default (
       console.log(decodedToken);
       // @ts-ignore
 
-      req.body.userId = decodedToken.id;
+      req.body.user_id = decodedToken.id;
       next();
     } catch (error) {
       console.log(error);

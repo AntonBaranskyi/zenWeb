@@ -28,15 +28,15 @@ const register = async (
     const hash = await bcrypt.hash(password, salt);
 
     const newUser = await User.create({
-      userId: uuidv4(),
+      user_id: uuidv4(),
       email: req.body.email,
-      fullName: req.body.fullName,
-      passwordHash: hash,
+      full_name: req.body.full_name,
+      password_hash: hash,
     });
 
     const token = jwt.sign(
       {
-        id: newUser.dataValues.userId,
+        id: newUser.dataValues.user_id,
       },
       'secret123',
       {
@@ -44,7 +44,7 @@ const register = async (
       }
     );
 
-    const { passwordHash, ...userData } = newUser.dataValues;
+    const { password_hash, ...userData } = newUser.dataValues;
 
     resp.json({ ...userData, token });
   } catch (error) {
@@ -66,7 +66,7 @@ const login = async (
 
     const isValidPassword = await bcrypt.compare(
       req.body.password,
-      user.dataValues.passwordHash
+      user.dataValues.password_hash
     );
 
     if (!isValidPassword) {
@@ -82,7 +82,7 @@ const login = async (
         expiresIn: '30d',
       }
     );
-    const { passwordHash, ...userData } = user.dataValues;
+    const { password_hash, ...userData } = user.dataValues;
 
     resp.json({ ...userData, token });
   } catch (error) {
@@ -96,13 +96,13 @@ const getMe = async (
   next: ExpressNext
 ) => {
   try {
-    const user = await User.findOne({ where: { userId: req.body.userId } });
+    const user = await User.findOne({ where: { user_id: req.body.user_id } });
 
     if (!user) {
       throw HttpError(404, 'Not found');
     }
 
-    const { passwordHash, ...userData } = user.dataValues;
+    const { password_hash, ...userData } = user.dataValues;
 
     resp.json({ ...userData });
   } catch (error) {

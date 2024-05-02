@@ -5,5 +5,5 @@ export const registerValidation = [
   body('password', 'Password should contain more than 4 symbols').isLength({
     min: 4,
   }),
-  body('fullName', 'Plese write your name').isLength({ min: 3 }),
+  body('full_name', 'Plese write your name').isLength({ min: 3 }),
 ];
