@@ -75,7 +75,7 @@ const login = async (
 
     const token = jwt.sign(
       {
-        id: user.dataValues.userId,
+        id: user.dataValues.user_id,
       },
       'secret123',
       {
