@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 import userRouter from './src/routes/user.js';
+import dealsRouter from './src/routes/deals.js';
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/auth', userRouter);
+
+app.use('/deals', dealsRouter);
 
 // @ts-ignore
 app.use((err: ResponseError, _req, res, _next) => {
