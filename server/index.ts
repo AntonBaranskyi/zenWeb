@@ -13,6 +13,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+app.use('/', (req, res) => {
+  res.send('Hello');
+});
+
 app.use('/auth', userRouter);
 
 app.use('/deals', dealsRouter);
