@@ -26,4 +26,9 @@
     border: none;
     font-size: 16px;
   }
+
+  &:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
 }
