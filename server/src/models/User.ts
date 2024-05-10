@@ -17,6 +17,9 @@ export const User = sequelize.define(
     password_hash: {
       type: DataTypes.TEXT,
     },
+    resetLink: {
+      type: DataTypes.TEXT,
+    },
   },
   {
     tableName: 'users',
