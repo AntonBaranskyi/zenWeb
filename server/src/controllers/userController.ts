@@ -167,7 +167,7 @@ const forgotPassword = async (
       .sendMail({
         from: 'antontest03@ukr.net',
         to: email,
-        subject: 'Hello world',
+        subject: 'Reset password. Anton Baranskyi test',
         html: `
          <h3>Please click a link below to reset your password</h3>
          <p>${process.env.CLIENT_URL}/auth/reset-password/${token}</p>
