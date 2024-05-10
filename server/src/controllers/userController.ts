@@ -155,7 +155,7 @@ const forgotPassword = async (
     });
 
     await User.update(
-      { resetLink: token },
+      { reset_link: token },
       {
         where: {
           email,
@@ -200,7 +200,7 @@ const updatePassword = async (
         }
       });
 
-      const updatedUser = await User.findOne({ where: { resetLink: token } });
+      const updatedUser = await User.findOne({ where: { reset_link: token } });
 
       if (!updatedUser) {
         throw HttpError(400, 'User with this token does not exist');
