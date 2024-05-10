@@ -1,4 +1,3 @@
-import React from 'react';
 
 import styles from './AuthForm.module.scss';
 import { Link } from 'react-router-dom';

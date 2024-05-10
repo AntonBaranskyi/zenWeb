@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styles from './AuthForm.module.scss';
 import { Link } from 'react-router-dom';
 
@@ -36,7 +34,7 @@ export const ForgotForm = () => {
         >
           Continue
         </button>
-        
+
         <Link to='/auth/logIn' className={styles.signUpLink}>
           Back to login
         </Link>
