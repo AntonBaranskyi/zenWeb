@@ -6,17 +6,24 @@ import { STATUS } from '../../types/statusEnum';
 import { ILoginData } from '../../types/ILoginData';
 import { RootState } from '../store';
 import { IRegisterData } from '../../types/IRegisterData';
+import { IUpdatePassword } from '../../types/IUpdatePassword';
 
 type State = {
   userData: IUser | null;
   loginStatus: STATUS;
   registerStatus: STATUS;
+  isOpenForgotModal: boolean;
+  forgotStatus: STATUS;
+  updateStatus: STATUS;
 };
 
 const initialState: State = {
   userData: null,
   loginStatus: STATUS.LOADING,
   registerStatus: STATUS.LOADING,
+  forgotStatus: STATUS.LOADING,
+  isOpenForgotModal: false,
+  updateStatus: STATUS.LOADING,
 };
 
 export const fetchLogin = createAsyncThunk(
@@ -43,6 +50,23 @@ export const fetchAuthMe = createAsyncThunk('auth/me', async () => {
   return response.data;
 });
 
+export const fetchForgotPassword = createAsyncThunk(
+  'auth/forgot',
+  async (params: { email: string }) => {
+    const response = await axios.post('/auth/forgot-password', params);
+
+    return response.data;
+  }
+);
+
+export const fetchUpdatePassword = createAsyncThunk(
+  'auth/update',
+  async (params: IUpdatePassword) => {
+    const response = await axios.patch('auth/update-password', params);
+
+    return response.data;
+  }
+);
 const userSlice = createSlice({
   name: 'userSlice',
   initialState,
@@ -105,6 +129,25 @@ const userSlice = createSlice({
     builder.addCase(fetchAuthMe.rejected, (state) => {
       // state.status = STATUS.ERROR;
       state.userData = null;
+    });
+
+    builder.addCase(fetchForgotPassword.fulfilled, (state) => {
+      state.isOpenForgotModal = true;
+
+      state.forgotStatus = STATUS.SUCCESS;
+    });
+
+    builder.addCase(fetchForgotPassword.rejected, (state) => {
+      state.forgotStatus = STATUS.ERROR;
+      state.isOpenForgotModal = false;
+    });
+
+    builder.addCase(fetchUpdatePassword.fulfilled, (state) => {
+      state.updateStatus = STATUS.SUCCESS;
+    });
+
+    builder.addCase(fetchUpdatePassword.rejected, (state) => {
+      state.updateStatus = STATUS.ERROR;
     });
   },
 });

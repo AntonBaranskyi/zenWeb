@@ -1,11 +1,92 @@
-
+import { useForm } from 'react-hook-form';
 import styles from './AuthForm.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { fetchUpdatePassword } from '../../store/slices/userSlice';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { useEffect } from 'react';
+import { STATUS } from '../../types/statusEnum';
+import Notiflix from 'notiflix';
 
 export const ResetForm = () => {
+  const { userToken } = useParams();
+
+  const { updateStatus } = useAppSelector((state) => state.user);
+
+  const dispatch = useAppDispatch();
+  const {
+    register,
+    handleSubmit,
+    clearErrors,
+    watch,
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: { password: '', passwordRepeat: '' },
+    mode: 'onBlur',
+  });
+
+  const password = watch('password');
+
+  const validatePasswordRepeat = (value: string) => {
+    if (value === password) {
+      return true;
+    } else {
+      return 'Passwords do not match';
+    }
+  };
+
+  const onHandleSubmit = (data: { password: string }) => {
+    if (userToken) {
+      const dataToSend = {
+        password: data.password,
+        token: userToken,
+      };
+
+      dispatch(fetchUpdatePassword(dataToSend));
+    }
+  };
+
+  useEffect(() => {
+    if (updateStatus === STATUS.SUCCESS) {
+      Notiflix.Notify.init({
+        position: 'right-top',
+      });
+      Notiflix.Notify.success('Successfully updated password', {
+        timeout: 1500,
+      });
+    }
+  }, [updateStatus]);
+
+  useEffect(() => {
+    if (updateStatus === STATUS.ERROR) {
+      Notiflix.Notify.init({
+        position: 'right-top',
+      });
+
+      Notiflix.Notify.failure('There is a problem with updating password', {
+        timeout: 1500,
+      });
+    }
+  }, [updateStatus]);
+
+  if (updateStatus === STATUS.SUCCESS) {
+    return <Navigate to='/auth/logIn' />;
+  }
+
+  const handlePasswordInputChange = () => {
+    clearErrors('password');
+  };
+
+  const handleRepeatPasswordChange = () => {
+    clearErrors('passwordRepeat');
+  };
+
   return (
     <div className={styles.loginForm}>
-      <form className={styles.loginWrapper}>
+      <form
+        className={styles.loginWrapper}
+        onSubmit={handleSubmit(onHandleSubmit)}
+      >
         <h2 className={styles.loginTitle}>Write new password</h2>
 
         <div className={styles.loginItemWrapper}>
@@ -14,19 +95,19 @@ export const ResetForm = () => {
             type='password'
             className='input'
             placeholder='Password'
-            // {...register('email', {
-            //   required: 'Please, write your email',
-            //   pattern: {
-            //     value: /^\S+@\S+\.\S+$/,
-            //     message: 'Invalid email address',
-            //   },
-            // })}
-            // onFocus={handleEmailInputChange}
+            {...register('password', {
+              required: 'Please,write your password',
+              minLength: {
+                value: 4,
+                message: 'Password should be at least 4 characters long',
+              },
+            })}
+            onFocus={handlePasswordInputChange}
           />
 
-          {/* {errors.email && (
-          <span className={styles.errorText}>{errors.email.message}</span>
-        )} */}
+          {errors.password && (
+            <span className={styles.errorText}>{errors.password.message}</span>
+          )}
         </div>
 
         <div className={styles.loginItemWrapper}>
@@ -35,24 +116,24 @@ export const ResetForm = () => {
             type='password'
             className='input'
             placeholder='Repeat password'
-            // {...register('email', {
-            //   required: 'Please, write your email',
-            //   pattern: {
-            //     value: /^\S+@\S+\.\S+$/,
-            //     message: 'Invalid email address',
-            //   },
-            // })}
-            // onFocus={handleEmailInputChange}
+            {...register('passwordRepeat', {
+              required: 'Please,write your password',
+              validate: validatePasswordRepeat,
+            })}
+            onFocus={handleRepeatPasswordChange}
           />
 
-          {/* {errors.email && (
-          <span className={styles.errorText}>{errors.email.message}</span>
-        )} */}
+          {errors.passwordRepeat && (
+            <span className={styles.errorText}>
+              {errors.passwordRepeat.message}
+            </span>
+          )}
         </div>
 
         <button
           className={`button button-primary ${styles.buttonLogin}`}
           type='submit'
+          disabled={!isValid}
         >
           Submit
         </button>

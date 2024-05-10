@@ -65,7 +65,6 @@ export const LoginForm = () => {
     dispatch(onCleanErrors());
   }, [dispatch]);
 
-
   if (isAuth) {
     return <Navigate to='/' />;
   }
@@ -120,9 +119,9 @@ export const LoginForm = () => {
           )}
 
           <div className={styles.forgotWrapper}>
-            <a href='#' className={styles.forgotPassword}>
+            <Link to='/auth/forgot-password' className={styles.forgotPassword}>
               Forgot password?
-            </a>
+            </Link>
           </div>
         </div>
 
